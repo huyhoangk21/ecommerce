@@ -19,12 +19,14 @@ const App = () => {
         userRef.onSnapshot(snapShop =>
           setCurrentUser({ id: snapShop.id, ...snapShop.data() })
         );
-        console.log(currentUser);
+      } else {
+        setCurrentUser(null);
       }
-      setCurrentUser(userAuth);
     });
     return () => unsubscribeFromAuth();
   }, []);
+
+  console.log(currentUser);
 
   return (
     <Fragment>

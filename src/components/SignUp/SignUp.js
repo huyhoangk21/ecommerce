@@ -22,7 +22,7 @@ const SignUp = () => {
       return;
     }
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-    await createUserProfileDocument(user, displayName);
+    await createUserProfileDocument(user, { displayName });
     setInput(initialState);
 
     try {
