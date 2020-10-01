@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <Header />
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
