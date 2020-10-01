@@ -5,14 +5,14 @@ import Button from '../Button/Button';
 import { auth, createUserProfileDocument } from '../../firebase/firebase';
 
 const SignUp = () => {
-  const initialState = {
+  const INITIAL_STATE = {
     displayName: '',
     email: '',
     password: '',
     confirmPassword: '',
   };
 
-  const [input, setInput] = useState(initialState);
+  const [input, setInput] = useState(INITIAL_STATE);
   const { displayName, email, password, confirmPassword } = input;
 
   const signUp = async e => {
@@ -23,7 +23,7 @@ const SignUp = () => {
     }
     const { user } = await auth.createUserWithEmailAndPassword(email, password);
     await createUserProfileDocument(user, { displayName });
-    setInput(initialState);
+    setInput(INITIAL_STATE);
 
     try {
     } catch (error) {

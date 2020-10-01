@@ -5,15 +5,15 @@ import Button from '../Button/Button';
 import { auth, signInWithGoogle } from '../../firebase/firebase';
 
 const SignIn = () => {
-  const initialInput = { email: '', password: '' };
-  const [input, setInput] = useState(initialInput);
+  const INITIAL_STATE = { email: '', password: '' };
+  const [input, setInput] = useState(INITIAL_STATE);
   const { email, password } = input;
 
   const signIn = async e => {
     e.preventDefault();
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      setInput(initialInput);
+      setInput(INITIAL_STATE);
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +50,7 @@ const SignIn = () => {
         />
         <div className='buttons'>
           <Button type='submit'>Sign In</Button>
-          <Button onClick={signInWithGoogle} isGoogleSignIn>
+          <Button type='button' onClick={signInWithGoogle} isGoogleSignIn>
             Sign in with Google
           </Button>
         </div>

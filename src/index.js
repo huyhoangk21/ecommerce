@@ -1,7 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import './index.css';
 import { auth, createUserProfileDocument } from './firebase/firebase';
 import Header from './components/Header/Header';
@@ -27,14 +28,14 @@ const App = () => {
   }, []);
 
   return (
-    <Fragment>
+    <Provider store={store}>
       <Header currentUser={currentUser} />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
         <Route path='/signin' component={SignInOutPage} />
       </Switch>
-    </Fragment>
+    </Provider>
   );
 };
 
