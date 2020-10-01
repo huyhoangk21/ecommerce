@@ -26,8 +26,6 @@ const App = () => {
     return () => unsubscribeFromAuth();
   }, []);
 
-  console.log(currentUser);
-
   return (
     <Fragment>
       <Header currentUser={currentUser} />
