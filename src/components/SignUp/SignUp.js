@@ -40,11 +40,12 @@ const SignUp = () => {
     <div className='sign-up'>
       <h2 className='title'>I do not have an account</h2>
       <span>Sign up with your email and password</span>
-      <form className='sign-up-form' onSubmit={signUp}>
+      <form className='sign-up-form' onSubmit={signUp} autoComplete='off'>
         <FormInput
           type='text'
           name='displayName'
           id='displayName'
+          label='Display Name'
           value={displayName}
           onChange={changeValue}
           required
@@ -53,6 +54,7 @@ const SignUp = () => {
           type='email'
           name='email'
           id='email'
+          label='Email'
           value={email}
           onChange={changeValue}
           required
@@ -61,6 +63,7 @@ const SignUp = () => {
           type='password'
           name='password'
           id='password'
+          label='Password'
           value={password}
           onChange={changeValue}
           required
@@ -69,6 +72,7 @@ const SignUp = () => {
           type='password'
           name='confirmPassword'
           id='confirmPassword'
+          label='Confirm Password'
           value={confirmPassword}
           onChange={changeValue}
           required

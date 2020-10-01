@@ -19,6 +19,7 @@ const App = () => {
         userRef.onSnapshot(snapShop =>
           setCurrentUser({ id: snapShop.id, ...snapShop.data() })
         );
+        console.log(currentUser);
       }
       setCurrentUser(userAuth);
     });
