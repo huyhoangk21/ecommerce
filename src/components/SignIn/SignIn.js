@@ -6,18 +6,18 @@ import { signInWithGoogle } from '../../firebase/firebase';
 
 const SignIn = () => {
   const initialInput = { email: '', password: '' };
-  const [inputs, setInputs] = useState(initialInput);
-  const { email, password } = inputs;
+  const [input, setInput] = useState(initialInput);
+  const { email, password } = input;
 
   const signIn = e => {
     e.preventDefault();
 
-    setInputs(initialInput);
+    setInput(initialInput);
   };
 
   const changeValue = e => {
     const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
+    setInput({ ...input, [name]: value });
   };
 
   return (
@@ -31,7 +31,7 @@ const SignIn = () => {
           name='email'
           id='email'
           value={email}
-          changeValue={changeValue}
+          onChange={changeValue}
           label='Email'
           required
         />
@@ -40,7 +40,7 @@ const SignIn = () => {
           name='password'
           id='password'
           value={password}
-          changeValue={changeValue}
+          onChange={changeValue}
           label='Password'
           required
         />
