@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './index.css';
-import { auth } from './firebase/firebase';
+import { auth, createUserProfileDocument } from './firebase/firebase';
 import Header from './components/Header/Header';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
@@ -13,9 +13,14 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-      console.log(user);
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShop =>
+          setCurrentUser({ id: snapShop.id, ...snapShop.data() })
+        );
+      }
+      setCurrentUser(userAuth);
     });
     return () => unsubscribeFromAuth();
   }, []);
