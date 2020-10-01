@@ -49,8 +49,8 @@ const App = ({ currentUser, setCurrentUser }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { currentUser: state.user.currentUser };
+const mapStateToProps = ({ user: { currentUser } }) => {
+  return { currentUser };
 };
 
 const AppRedux = connect(
