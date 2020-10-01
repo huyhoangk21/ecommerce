@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import './SignIn.styles.scss';
-
+import FormInput from '../FormInput/FormInput';
+import Button from '../Button/Button';
 const SignIn = () => {
   const initialInput = { email: '', password: '' };
-  const [{ email, password }, setInput] = useState(initialInput);
+  const [inputs, setInputs] = useState(initialInput);
+  const { email, password } = inputs;
 
   const signIn = e => {
     e.preventDefault();
 
-    setInput(initialInput);
+    setInputs(initialInput);
   };
 
   const changeValue = e => {
     const { name, value } = e.target;
-    setInput({ [name]: value });
+    setInputs({ ...inputs, [name]: value });
   };
 
   return (
@@ -21,26 +23,26 @@ const SignIn = () => {
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
 
-      <form onSubmit={signIn}>
-        <input
+      <form onSubmit={signIn} autoComplete='off'>
+        <FormInput
           type='email'
           name='email'
           id='email'
           value={email}
-          onChange={changeValue}
+          changeValue={changeValue}
+          label='Email'
           required
         />
-        <label htmlFor='email'>Email</label>
-        <input
+        <FormInput
           type='password'
           name='password'
           id='password'
           value={password}
-          onChange={changeValue}
+          changeValue={changeValue}
+          label='Password'
           required
         />
-        <label htmlFor='password'>Password</label>
-        <input type='submit' value='Submit Form' />
+        <Button type='submit'>Sign In</Button>
       </form>
     </div>
   );
