@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './SignIn.styles.scss';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
+import { signInWithGoogle } from '../../firebase/firebase';
+
 const SignIn = () => {
   const initialInput = { email: '', password: '' };
   const [inputs, setInputs] = useState(initialInput);
@@ -43,6 +45,7 @@ const SignIn = () => {
           required
         />
         <Button type='submit'>Sign In</Button>
+        <Button onClick={signInWithGoogle}>Sign in with Google</Button>
       </form>
     </div>
   );
