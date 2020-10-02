@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { store, persistor } from './redux/store';
 import './index.css';
 import {
   BrowserRouter as Router,
@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { auth, createUserProfileDocument } from './firebase/firebase';
 import { setCurrentUser } from './redux/actions/user';
 import { currentUserSelector } from './utils/userSelector';
+import { PersistGate } from 'redux-persist/integration/react';
 import Header from './components/Header/Header';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
@@ -35,19 +36,23 @@ const App = ({ currentUser, setCurrentUser }) => {
   }, [setCurrentUser]);
 
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/shop' component={ShopPage} />
-        <Route
-          exact
-          path='/signin'
-          render={() => (currentUser ? <Redirect to='/' /> : <SignInOutPage />)}
-        />
-        <Route exact path='/checkout' component={CheckoutPage} />
-      </Switch>
-    </Router>
+    <PersistGate persistor={persistor}>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route
+            exact
+            path='/signin'
+            render={() =>
+              currentUser ? <Redirect to='/' /> : <SignInOutPage />
+            }
+          />
+          <Route exact path='/checkout' component={CheckoutPage} />
+        </Switch>
+      </Router>
+    </PersistGate>
   );
 };
 
