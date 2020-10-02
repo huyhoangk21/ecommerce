@@ -17,6 +17,7 @@ import Header from './components/Header/Header';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import SignInOutPage from './pages/SignInOutPage/SignInOutPage';
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 
 const App = ({ currentUser, setCurrentUser }) => {
   useEffect(() => {
@@ -44,6 +45,7 @@ const App = ({ currentUser, setCurrentUser }) => {
           path='/signin'
           render={() => (currentUser ? <Redirect to='/' /> : <SignInOutPage />)}
         />
+        <Route exact path='/checkout' component={CheckoutPage} />
       </Switch>
     </Router>
   );
