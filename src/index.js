@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { auth, createUserProfileDocument } from './firebase/firebase';
 import { setCurrentUser } from './redux/actions/user';
-
+import { currentUserSelector } from './utils/userSelector';
 import Header from './components/Header/Header';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
@@ -49,18 +49,15 @@ const App = ({ currentUser, setCurrentUser }) => {
   );
 };
 
-const mapStateToProps = ({ user: { currentUser } }) => {
-  return { currentUser };
+const mapStateToProps = state => {
+  return { currentUser: currentUserSelector(state) };
 };
 
-const AppRedux = connect(
-  mapStateToProps,
-  { setCurrentUser }
-)(App);
+const AppConnect = connect(mapStateToProps, { setCurrentUser })(App);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppRedux />
+    <AppConnect />
   </Provider>,
   document.querySelector('#root')
 );
