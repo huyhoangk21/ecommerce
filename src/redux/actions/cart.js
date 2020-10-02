@@ -7,3 +7,7 @@ export const toggleCartHidden = () => dispatch => {
 export const addItem = item => dispatch => {
   dispatch({ type: Cart.ADD_ITEM, payload: item });
 };
+
+export const removeItem = item => dispatch => {
+  dispatch({ type: Cart.REMOVE_ITEM, payload: item });
+};

@@ -1,6 +1,10 @@
 import React from 'react';
 import './CheckoutItem.styles.scss';
-const CheckoutItem = ({ cartItem: { name, quantity, price, imageUrl } }) => {
+import { connect } from 'react-redux';
+import { removeItem } from '../../redux/actions/cart';
+
+const CheckoutItem = ({ cartItem, removeItem }) => {
+  const { name, quantity, price, imageUrl } = cartItem;
   return (
     <div className='checkout-item'>
       <div className='image-container'>
@@ -9,9 +13,11 @@ const CheckoutItem = ({ cartItem: { name, quantity, price, imageUrl } }) => {
       <span className='name'>{name}</span>
       <span className='quantity'>{quantity}</span>
       <span className='price'>{price}</span>
-      <span className='remove-button'>&#10005;</span>
+      <span className='remove-button' onClick={() => removeItem(cartItem)}>
+        &#10005;
+      </span>
     </div>
   );
 };
 
-export default CheckoutItem;
+export default connect(null, { removeItem })(CheckoutItem);
