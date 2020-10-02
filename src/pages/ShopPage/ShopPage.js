@@ -1,8 +1,9 @@
 import React from 'react';
-import shopData from './ShopPage.data';
+import { connect } from 'react-redux';
+import { shopCollectionsSelector } from '../../utils/shopSelector';
 import CollectionPreview from '../../components/CollectionPreview/CollectionPreview';
 
-const ShopPage = () => {
+const ShopPage = ({ shopData }) => {
   const renderedCollectionPreview = shopData.map(({ id, ...previewProps }) => (
     <CollectionPreview key={id} {...previewProps} />
   ));
@@ -10,4 +11,8 @@ const ShopPage = () => {
   return <div className='shop-page'>{renderedCollectionPreview}</div>;
 };
 
-export default ShopPage;
+const mapStateToProps = state => {
+  return { shopData: shopCollectionsSelector(state) };
+};
+
+export default connect(mapStateToProps)(ShopPage);
