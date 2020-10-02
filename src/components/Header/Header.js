@@ -11,7 +11,6 @@ import { currentUserSelector } from '../../utils/userSelector';
 import { cartHiddenSelector } from '../../utils/cartSelector';
 
 const Header = ({ currentUser, hidden }) => {
-  console.log(currentUser);
   const renderedAuthLinks = currentUser ? (
     <div className='option' onClick={() => auth.signOut()}>
       SIGN OUT
